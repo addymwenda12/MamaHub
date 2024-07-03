@@ -42,7 +42,6 @@ export default function Signup() {
         </div>
         <div className="form-container">
           <h1 className="form-title">Sign Up</h1>
-          <p>Get started with us</p>
           <div className="form-input-container">
             <div className="input-container">
               <label className="form-label" htmlFor="email">

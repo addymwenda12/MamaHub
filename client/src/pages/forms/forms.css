@@ -50,6 +50,22 @@
     gap: 12px;
     width: 300px;
 }
+.form-input-container .wrapper{
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: .9rem;
+    cursor: pointer;
+}
+.toSignup{
+    color: #111;
+    text-decoration: none;
+}
 .input-wrapper{
     display: flex;
     align-items: center;
