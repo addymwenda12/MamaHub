@@ -8,13 +8,10 @@ import path from 'path';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { fileURLToPath } from 'url';
-import authRoutes from './routes/auth.js'; // Imports auth routes
-import userRoutes from './routes/userRoutes.js'; // Imports user routes
-import { register } from './controllers/auth.js'; // Imports register controller
-// import { createPost } from './controllers/posts.js'; // Imports createPost controller
-import { verifyToken } from './middleware/auth.js'; // Imports verifyToken middleware
-import User from "./models/User.js"; // Imports User model
-
+import authRoutes from './routes/auth.js';
+import userRoutes from './routes/userRoutes.js';
+import { register } from './controllers/auth.js';
+import { verifyToken } from './middleware/auth.js';
 
 /* CONFIGURATION */
 dotenv.config();
@@ -36,14 +33,12 @@ const PORT = process.env.PORT || 6001;
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true,
 })
 .then (() => {
   app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
 
   /* ONE DATABASE MODEL AT A TIME */
   // User.insertMany(users);
-  // Post.insertMany(posts);
 })
 .catch((error) => console.log(`${error} did not connect`));
 
@@ -60,9 +55,7 @@ const upload = multer({ storage: storage });
 
 /* ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
-app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 /* ROUTES */
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
-app.use("/posts", postRoutes);
