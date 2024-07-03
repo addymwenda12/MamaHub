@@ -8,6 +8,8 @@ import path from 'path';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { fileURLToPath } from 'url';
+import authRoutes from './routes/auth.js'; // Import auth routes
+import userRoutes from './routes/userRoutes.js'; // Import user routes
 
 /* CONFIGURATION */
 dotenv.config();
