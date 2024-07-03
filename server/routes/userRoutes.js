@@ -3,6 +3,8 @@ import {
   getUser,
   getUserFriends,
   addRemoveFriend,
+  getUserProfile,
+  updateUserProfile
 } from "../controllers/users.js";
 import { verifyToken } from "../middleware/auth.js";
 
