@@ -47,7 +47,18 @@ export const likePost = async (req, res) => {
   try {
     const { Id } = req.params;
     const { userId } = req.body;
+
+    // Check if the post by id
     const post = await Post.findById(Id);
+
+    // Log the post to the console
+    console.log('Post:', post);
+
+    // If the post is not found, return an error message
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
     const isLiked = post.likes.get(userId);
 
     if (isLiked) {
