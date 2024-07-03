@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js'; // Imports auth routes
 import userRoutes from './routes/userRoutes.js'; // Imports user routes
 import { register } from './controllers/auth.js'; // Imports register controller
-import { createPost } from './controllers/posts.js'; // Imports createPost controller
+// import { createPost } from './controllers/posts.js'; // Imports createPost controller
 import { verifyToken } from './middleware/auth.js'; // Imports verifyToken middleware
 import User from "./models/User.js"; // Imports User model
 
