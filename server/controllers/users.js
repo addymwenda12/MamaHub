@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from '../models/User.js';
 
 /* READ */
 export const getUser = async (req, res) => {
@@ -27,6 +27,38 @@ export const getUserFriends = async (req, res) => {
     res.status(200).json(formattedFriends);
   } catch (err) {
     res.status(404).json({ message: err.message });
+  }
+};
+
+/* PROFILE */
+export const getUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user).select('-password');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const updateUserProfile = async (req, res) => {
+  const { name, email, picturePath } = req.body;
+  try {
+    const user = await User.findById(req.user);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.name = name || user.name;
+    user.email = email || user.email;
+    user.picturePath = picturePath || user.picturePath;
+
+    await user.save();
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
   }
 };
 
