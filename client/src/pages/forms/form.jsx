@@ -1,3 +1,4 @@
+import Logo from "../../components/logo/Logo";
 import "./forms.css";
 import { Link} from "react-router-dom";
 
@@ -5,10 +6,7 @@ export default function Form() {
   return (
     <div className="form">
       <div className="form-wrapper">
-        <div className="logo-wrapper">
-          <img src="../../images/logo.png" alt="logo" width={40} height={40} />
-          <span>mamahub</span>
-        </div>
+        <Logo/>
         <div className="form-container">
           <h1 className="form-title">Sign Up</h1>
           <p>Get started with us</p>

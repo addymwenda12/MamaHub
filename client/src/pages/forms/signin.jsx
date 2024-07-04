@@ -5,6 +5,7 @@ import { GlobalContext } from "../../context/context";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegUser, FaLock } from "react-icons/fa6";
+import Logo from "../../components/logo/Logo";
 
 export default function Login() {
   const { loginData, setLoginData, user, setUser } = useContext(GlobalContext);
@@ -39,10 +40,7 @@ export default function Login() {
   return (
     <div className="form">
       <div className="form-wrapper">
-        <div className="logo-wrapper">
-          <img src="../../images/logo.png" alt="logo" width={40} height={40} />
-          <span>mamahub</span>
-        </div>
+        <Logo/>
         <div className="form-container">
           <h1 className="form-title">Sign in</h1>
           <div className="form-input-container">
