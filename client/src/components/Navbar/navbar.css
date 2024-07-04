@@ -1,12 +1,11 @@
 .navbar-container {
   display: flex;
   align-items: center;
-  padding: 12px 30px;
+  padding: 20px 20px;
   margin-bottom: 10px;
   z-index: 1000;
 }
 .nav-menu {
-  flex: 1;
   list-style-type: none;
   display: flex;
   align-items: center;

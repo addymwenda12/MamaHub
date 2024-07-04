@@ -6,6 +6,7 @@ import Login from "./pages/forms/signin";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import SideBar from "./components/Sidebar/sidebar";
+import Main from "./components/Main/Main";
 
 
 function App() {
@@ -25,11 +26,13 @@ function App() {
         </Routes>
       ) : (
         <>
-          <Navbar />
           <SideBar/>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
+          <Main>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </Main>
         </>
       )}
     </section>
