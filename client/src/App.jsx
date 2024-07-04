@@ -1,20 +1,39 @@
-import {Routes,Route} from 'react-router-dom'
-import './App.css'
-import Signup from './pages/forms/signup'
-import Form from './pages/forms/form'
-import Login from './pages/forms/signin'
+import { Routes, Route, useLocation } from "react-router-dom";
+import "./App.css";
+import Signup from "./pages/forms/signup";
+import Form from "./pages/forms/form";
+import Login from "./pages/forms/signin";
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./pages/Home/Home";
+import SideBar from "./components/Sidebar/sidebar";
+
 
 function App() {
+  const location = useLocation();
+  const isAuth =
+    location.pathname === "/accounts/get-started" ||
+    location.pathname === "/accounts/login" ||
+    location.pathname === "/accounts/create-account";
 
   return (
-    <section>
-      <Routes>
-        <Route path={'/accounts/get-started'} element={<Form/>}/>
-        <Route path={'/accounts/login'} element={<Login/>}/>
-        <Route path={'/accounts/create-account'} element={<Signup/>}/>
-      </Routes>
+    <section className="App">
+      {isAuth ? (
+        <Routes>
+          <Route path={"/accounts/get-started"} element={<Form />} />
+          <Route path={"/accounts/login"} element={<Login />} />
+          <Route path={"/accounts/create-account"} element={<Signup />} />
+        </Routes>
+      ) : (
+        <>
+          <Navbar />
+          <SideBar/>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </>
+      )}
     </section>
-  )
+  );
 }
 
-export default App
+export default App;
