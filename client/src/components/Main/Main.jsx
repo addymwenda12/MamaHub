@@ -2,7 +2,7 @@
 
 const Main = ({children}) => {
   return (
-    <section className='main' style={{minHeight:'100vh',marginLeft:'210px', padding:'0 20px'}}>
+    <section className='main' style={{minHeight:'100vh',flex:1,display:'flex',gap:'10px'}}>
       {children}
     </section>
   )

@@ -31,7 +31,7 @@ export default function SideBar() {
   ];
 
   return (
-    <div className="sidebar-container">
+    <aside className="sidebar-container">
       <Logo />
       <Searchbar />
       <div className="dashboard sidebar-content">
@@ -69,6 +69,6 @@ export default function SideBar() {
           </li>
         </ul>
       </div>
-    </div>
+    </aside>
   );
 }
