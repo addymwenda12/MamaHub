@@ -1,6 +1,7 @@
 import "./sidebar.css";
 import { NavLink } from "react-router-dom";
 import { IoMdSettings } from "react-icons/io";
+import { MdGroup } from "react-icons/md";
 import { TbLogout2 } from "react-icons/tb";
 import Logo from "../logo/Logo";
 import Searchbar from "../Searchbar/Searchbar";
@@ -32,7 +33,7 @@ export default function SideBar() {
   return (
     <div className="sidebar-container">
       <Logo />
-      <Searchbar/>
+      <Searchbar />
       <div className="dashboard sidebar-content">
         <h1 className="title">Dashboard</h1>
         <ul className="menu-list list">
@@ -49,6 +50,12 @@ export default function SideBar() {
       <div className="settings sidebar-content">
         <ul className="settings-list list">
           <li className="settings-item list-item">
+            <div className="link">
+              <MdGroup size={18} />
+              <span>create a group</span>
+            </div>
+          </li>
+          <li className="settings-item list-item">
             <NavLink to={"/settings"} className="link">
               <IoMdSettings size={18} />
               <span>settings</span>
@@ -56,7 +63,7 @@ export default function SideBar() {
           </li>
           <li className="settings-item list-item">
             <NavLink to={"/logout"} className="link logout">
-              <TbLogout2 className="logout-icon" size={18}/>
+              <TbLogout2 className="logout-icon" size={18} />
               <span>log out</span>
             </NavLink>
           </li>
