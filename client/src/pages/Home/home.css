@@ -1,0 +1,10 @@
+.sharedPost{
+    margin: 10px 0;
+}
+.sharedPost .title{
+    font-weight: 600;
+    color: #111;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    text-transform: capitalize;
+}
