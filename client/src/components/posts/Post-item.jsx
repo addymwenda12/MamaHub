@@ -27,10 +27,10 @@ const PostItem = () => {
           quam sit amet sem tempus porta.
         </p>
         <div className="post-controls">
-          <FaRegHeart size={20} className="post-icon"/>
-          <FaRegComment size={20} className="post-icon"/>
-          <IoIosShareAlt size={20} className="post-icon"/>
-          <FaRegBookmark size={20} className="post-icon"/>
+          <FaRegHeart size={18} className="post-icon"/>
+          <FaRegComment size={18} className="post-icon"/>
+          <IoIosShareAlt size={18} className="post-icon"/>
+          <FaRegBookmark size={18} className="post-icon"/>
         </div>
       </div>
     </section>

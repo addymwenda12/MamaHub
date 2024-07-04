@@ -5,6 +5,7 @@
     border-radius: 10px;
     margin-bottom: 12px;
     background-color: #FFF;
+    cursor: pointer;
 }
 .post-header{
     display: flex;
@@ -67,4 +68,5 @@
 }
 .post-icon{
     color: #434343;
+    cursor: pointer;
 }

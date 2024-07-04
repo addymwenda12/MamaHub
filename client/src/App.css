@@ -1,4 +1,11 @@
 .App{
     background-color: #FCFBFB;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.body{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
