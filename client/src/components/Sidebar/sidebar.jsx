@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { IoMdSettings } from "react-icons/io";
 import { TbLogout2 } from "react-icons/tb";
 import Logo from "../logo/Logo";
+import Searchbar from "../Searchbar/Searchbar";
 
 export default function SideBar() {
   const dashboard = [
@@ -31,7 +32,7 @@ export default function SideBar() {
   return (
     <div className="sidebar-container">
       <Logo />
-
+      <Searchbar/>
       <div className="dashboard sidebar-content">
         <h1 className="title">Dashboard</h1>
         <ul className="menu-list list">
