@@ -3,6 +3,8 @@ import "./navbar.css";
 import { useContext} from "react";
 import { NavLink,useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../context/context";
+import { IoNotificationsOutline } from "react-icons/io5";
+import { MdOutlineAddBox } from "react-icons/md";
 
 export default function Navbar() {
   const {user}=useContext(GlobalContext)
@@ -32,6 +34,8 @@ export default function Navbar() {
       </ul>
 
       <div className="right-section">
+        <MdOutlineAddBox size={24} className="icon-btns"/>
+        <IoNotificationsOutline size={24} className="icon-btns"/>
         {
           user === null?
           <button className="login-btn" onClick={()=>navigate('/accounts/login')}>login</button>

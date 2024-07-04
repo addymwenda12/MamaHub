@@ -47,3 +47,7 @@
   text-transform: capitalize;
   cursor: pointer;
 }
+.icon-btns{
+  color: #5F5F5F;
+  cursor: pointer;
+}
