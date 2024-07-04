@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import SideBar from "./components/Sidebar/sidebar";
 import Main from "./components/Main/Main";
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
             </Routes>
+            <Footer/>
           </Main>
         </>
       )}
