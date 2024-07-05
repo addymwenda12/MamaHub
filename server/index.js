@@ -14,6 +14,7 @@ import User from './models/User.js';
 import postRoutes from './routes/posts.js';
 import { register } from './controllers/auth.js';
 import { verifyToken } from './middleware/auth.js';
+import commentRoutes from './routes/commentRoutes.js'
 
 /* CONFIGURATION */
 dotenv.config();
@@ -62,3 +63,4 @@ app.post("/auth/register", upload.single("picture"), register);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
+app.use("/comments", commentRoutes);
