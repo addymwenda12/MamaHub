@@ -1,8 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
-import Signup from "./pages/forms/signup";
-import Form from "./pages/forms/form";
-import Login from "./pages/forms/signin";
+import Signup from "./pages/forms/Form.jsx";
+import Form from "./pages/forms/GetStarted";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import SideBar from "./components/Sidebar/sidebar";
@@ -13,17 +12,15 @@ import Footer from "./components/Footer/Footer";
 function App() {
   const location = useLocation();
   const isAuth =
-    location.pathname === "/accounts/get-started" ||
-    location.pathname === "/accounts/login" ||
-    location.pathname === "/accounts/create-account";
+    location.pathname === "/get-started" ||
+    location.pathname === "/account";
 
   return (
     <section className="App">
       {isAuth ? (
         <Routes>
-          <Route path={"/accounts/get-started"} element={<Form />} />
-          <Route path={"/accounts/login"} element={<Login />} />
-          <Route path={"/accounts/create-account"} element={<Signup />} />
+          <Route path={"/get-started"} element={<Form />} />
+          <Route path={"/account"} element={<Signup />} />
         </Routes>
       ) : (
         <section className="body">

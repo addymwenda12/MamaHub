@@ -37,7 +37,7 @@
     list-style-type: none;
     text-transform: capitalize;
 }
-.link{
+.list-item .link{
     display: flex;
     gap:10px;
     align-items: center;
