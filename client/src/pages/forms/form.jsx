@@ -1,5 +1,7 @@
 import "./forms.css";
+// eslint-disable-next-line no-unused-vars
 import { useContext, useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { useNavigate } from "react-router-dom";
 import { FaRegUser, FaLock } from "react-icons/fa6";
 import Logo from "../../components/logo/Logo";

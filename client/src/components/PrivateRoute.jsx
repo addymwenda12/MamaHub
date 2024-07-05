@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { GlobalContext } from "../context/context";
