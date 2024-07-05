@@ -2,11 +2,8 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import Signup from "./pages/forms/Form.jsx";
 import Form from "./pages/forms/GetStarted";
-import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
-import SideBar from "./components/Sidebar/sidebar";
-import Main from "./components/Main/Main";
-import Footer from "./components/Footer/Footer";
+import {Navbar,Sidebar,Main,Footer } from "./components";
 
 
 function App() {
@@ -25,7 +22,7 @@ function App() {
       ) : (
         <section className="body">
           <Main>
-            <SideBar/>
+            <Sidebar/>
             <div style={{flex:1,padding:'0 10px'}}>
             <Navbar />
             <Routes>

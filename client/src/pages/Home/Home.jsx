@@ -1,8 +1,6 @@
-import Banner from "../../components/banner/Banner";
-import ItemContainer from "../../components/itemContainer/ItemContainer";
-import PostItem from "../../components/posts/Post-item";
 import "./home.css";
 import { Link } from "react-router-dom";
+import { Banner,PostItem,ItemContainer} from "../../components";
 
 const Home = () => {
   return (
