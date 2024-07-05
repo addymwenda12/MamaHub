@@ -1,0 +1,56 @@
+.banner{
+    width: 100%;
+    padding: 20px 30px;
+    background-color: #FF4F00;
+    height: 300px;
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    position: relative;
+}
+.banner-text-section{
+    flex: 1;
+    color: #FFFFFF;
+}
+.superText{
+    font-size: 2.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding-bottom: 10px;
+    line-height: 3rem;
+}
+.subText{
+    font-size: .7rem;
+    font-weight: 400;
+    padding-bottom: 10px;
+}
+.FAB{
+    margin-top: 5px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #111;
+    border-radius: 7px;
+    background-color: #FFD60A;
+    border: 0;outline: 0;
+    cursor: pointer;
+}
+.FAB span{
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.banner-image-section{
+    height: 100%;
+    flex: 1;
+}
+.banner-image-section img{
+    width: 100%;height: 100%;
+    object-fit: contain;
+}
+.close-icon{
+    position: absolute;
+    top: 2%;right: 2%;
+    cursor: pointer;
+}
