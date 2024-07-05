@@ -1,56 +1,47 @@
 import "./forms.css";
 import { useContext, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaRegUser, FaLock } from "react-icons/fa6";
 import Logo from "../../components/logo/Logo";
 import { GlobalContext } from "../../context/context";
 
-const initialState = {
-    email: "",
-    password: "",
-    confirmPassword: "",
-}
-
 export default function Signup() {
-  const [form,setForm]= useState(initialState)
-  const {isSignup,switchForm} = useContext(GlobalContext)
-  const [, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const Navigate = useNavigate();
+  const {
+    isSignup,
+    switchForm,
+    signupData,
+    setSignupData,
+    loginData,
+    setLoginData,
+    handleSignup,
+    handleLogin,
+    error,
+  } = useContext(GlobalContext);
 
-  const handleChange =(e)=>{
-    setForm({...form,[e.target.name]:e.target.value})
-    console.log(form)
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (isSignup) {
+      setSignupData({ ...signupData, [name]: value });
+    } else {
+      setLoginData({ ...loginData, [name]: value });
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const {email,password,confirmPassword}=form
-    try {
-      setLoading(true);
-      const response = await axios.post(`http://localhost:3001/auth/${isSignup ?'signup' :'login'}`, {
-        email,password,confirmPassword
-      });
-      const result = response.data;
-      if (result) {
-        Navigate("/accounts/login");
-        console.log("user created successfully");
-      }
-    } catch (err) {
-      setLoading(false);
-      console.log(err.response.data.message);
-      setError(err.response.data.message);
+    if (isSignup) {
+      await handleSignup();
+    } else {
+      await handleLogin();
     }
-    setLoading(false);
   };
 
   return (
     <div className="form">
       <div className="form-wrapper">
-        <Logo/>
+        <Logo />
         <div className="form-container">
-          <h1 className="form-title">{isSignup ? 'Sign Up' : 'Sign In'}</h1>
+          <h1 className="form-title">{isSignup ? "Sign Up" : "Sign In"}</h1>
           <div className="form-input-container">
             <div className="input-container">
               <label className="form-label" htmlFor="email">
@@ -63,13 +54,14 @@ export default function Signup() {
                   name="email"
                   id="email"
                   className="form-input"
-                  placeholder="enter email"
+                  placeholder="Enter email"
+                  value={isSignup ? signupData.email : loginData.email}
                   onChange={handleChange}
                 />
               </div>
             </div>
             <div className="input-container">
-              <label className="form-label" htmlFor="passowrd">
+              <label className="form-label" htmlFor="password">
                 Password
               </label>
               <div className="input-wrapper">
@@ -80,47 +72,47 @@ export default function Signup() {
                   id="password"
                   className="form-input"
                   placeholder=""
+                  value={isSignup ? signupData.password : loginData.password}
                   onChange={handleChange}
                 />
               </div>
             </div>
-            {
-                isSignup && <div className="input-container">
-              <label className="form-label" htmlFor="confirmPassword">
-                Confirm Password
-              </label>
-              <div className="input-wrapper">
-                <FaLock size={16} className="user-icon icon" />
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  id="confirmPassword"
-                  className="form-input"
-                  placeholder=""
-                  onChange={handleChange}
-                />
+            {isSignup && (
+              <div className="input-container">
+                <label className="form-label" htmlFor="confirmPassword">
+                  Confirm Password
+                </label>
+                <div className="input-wrapper">
+                  <FaLock size={16} className="user-icon icon" />
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    className="form-input"
+                    placeholder=""
+                    value={signupData.confirmPassword}
+                    onChange={handleChange}
+                  />
+                </div>
               </div>
-            </div>
-            }
+            )}
             <button type="submit" className="submit-btn" onClick={handleSubmit}>
-              {isSignup ? 'create account' : 'log in'}
+              {isSignup ? "Create Account" : "Log In"}
             </button>
-            <p>terms and conditions apply</p>
+            <p>Terms and conditions apply</p>
             <p>
-              { isSignup ? 'Already have an account?' : "Don't have an account?" }
+              {isSignup ? "Already have an account?" : "Don't have an account?"}
               <span onClick={switchForm} className="link">
-                {isSignup ? 'Log in' : 'sign up'}
+                {isSignup ? "Log in" : "Sign up"}
               </span>
             </p>
-            {error ? (
+            {error && (
               <div className="error-message">
                 <ul className="error-list">
-                  {error.map((errorItem, index) => (
-                    <li key={index}>{errorItem}</li>
-                  ))}
+                  <li>{error}</li>
                 </ul>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </div>
