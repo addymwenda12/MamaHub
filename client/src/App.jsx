@@ -4,6 +4,7 @@ import Signup from "./pages/forms/form.jsx";
 import Form from "./pages/forms/GetStarted";
 import Home from "./pages/Home/Home";
 import {Navbar,Sidebar,Main,Footer } from "./components";
+import PrivateRoute from "./components/PrivateRoute";
 
 
 function App() {
@@ -26,7 +27,9 @@ function App() {
             <div style={{flex:1,padding:'0 10px'}}>
             <Navbar />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<PrivateRoute />}>
+                <Route path="/" element={<Home />} />
+              </Route>
             </Routes>
             </div>
           </Main>
