@@ -29,7 +29,7 @@ export default function Signup() {
     const {email,password,confirmPassword}=form
     try {
       setLoading(true);
-      const response = await axios.post(`http://localhost:5000/api/${isSignup ?'signup' :'login'}`, {
+      const response = await axios.post(`http://localhost:3001/auth/${isSignup ?'signup' :'login'}`, {
         email,password,confirmPassword
       });
       const result = response.data;

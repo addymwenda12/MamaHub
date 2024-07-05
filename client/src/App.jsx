@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
-import Signup from "./pages/forms/Form.jsx";
+import Signup from "./pages/forms/form.jsx";
 import Form from "./pages/forms/GetStarted";
 import Home from "./pages/Home/Home";
 import {Navbar,Sidebar,Main,Footer } from "./components";
