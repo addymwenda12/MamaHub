@@ -1,38 +1,78 @@
-import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
-import Signup from "./pages/forms/Form.jsx";
-import Form from "./pages/forms/GetStarted";
-import Home from "./pages/Home/Home";
-import {Navbar,Sidebar,Main,Footer } from "./components";
 
+import { Routes, Route} from "react-router-dom";
+import { useContext } from "react";
+import { StreamChat } from "stream-chat";
+import Cookies from "universal-cookie";
+
+
+import { Navbar, Sidebar, Main, Footer,Chatbox } from "./components";
+import {FormsContainer,CreateProfile,Home} from './pages'
+import { GlobalContext } from "./context/context";
+
+const cookies = new Cookies();
+
+const apiKey = "q4yxdb8badm6";
+const authToken = cookies.get("token");
+
+const client = StreamChat.getInstance(apiKey);
+
+if (authToken) {
+  client.connectUser(
+    {
+      id: cookies.get("userId"),
+      email: cookies.get("email"),
+      hashedPassword: cookies.get("hashedPassword"),
+    },
+    authToken
+  );
+}
+console.log(cookies.get('profile token'))
 
 function App() {
-  const location = useLocation();
-  const isAuth =
-    location.pathname === "/get-started" ||
-    location.pathname === "/account";
+  
+  const {isGroupSelected}=useContext(GlobalContext)
 
+  if (!authToken) {
+    return (
+      <section className="App">
+          <Routes>
+            <Route path={"/get-started"} element={<FormsContainer />} />
+          </Routes>
+      </section>
+    );
+  }
+  
   return (
-    <section className="App">
-      {isAuth ? (
-        <Routes>
-          <Route path={"/get-started"} element={<Form />} />
-          <Route path={"/account"} element={<Signup />} />
-        </Routes>
-      ) : (
-        <section className="body">
-          <Main>
-            <Sidebar/>
-            <div style={{flex:1,padding:'0 10px'}}>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-            </Routes>
+    <section className="App">  
+      <section className="body">
+        {
+          cookies.get('profile token') !== undefined ? 
+          <>
+        <Main>
+            <Sidebar /> 
+            <div style={{ flex: 1}}>
+              <Navbar />
+              {
+                isGroupSelected ? 
+                <Chatbox/>
+                :
+                <div style={{padding:'0 10px'}}>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                  </Routes>
+                </div>
+              }
             </div>
-          </Main>
-          <Footer/>
-        </section>
-      )}
+        </Main>
+        <Footer />
+        </>
+        :
+          <Routes>
+            <Route path={"/create-profile"} element={<CreateProfile/>} />
+          </Routes>
+            }
+      </section>
     </section>
   );
 }

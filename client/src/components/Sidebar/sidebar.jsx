@@ -1,34 +1,43 @@
 import "./sidebar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { IoMdSettings } from "react-icons/io";
 import { MdGroup } from "react-icons/md";
 import { TbLogout2 } from "react-icons/tb";
 import Logo from "../logo/Logo";
 import Searchbar from "../Searchbar/Searchbar";
+import ItemWrapper from "./itemContainer";
+
+import Cookies from "universal-cookie";
+
+
+const cookies = new Cookies();
 
 export default function SideBar() {
-  const dashboard = [
+  
+  const navigate = useNavigate();
+  const logout = () => {
+    cookies.remove("token");
+    cookies.remove("userId");
+    cookies.remove("email"), 
+    cookies.remove("hashedPassword");
+    cookies.remove("name")
+    cookies.remove("image")
+    cookies.remove("profile token")
+
+    navigate("/get-started");
+    window.location.reload();
+  };
+  const groups = [
     {
-      id: 1,
-      label: "chats",
-      to: "/chats",
+      id:1,
+      name:'mothers',
     },
     {
-      id: 2,
-      label: "groups",
-      to: "/groups",
-    },
-    {
-      id: 3,
-      label: "continue learning",
-      to: "/continueLearning",
-    },
-    {
-      id: 4,
-      label: "profile",
-      to: "/profile",
-    },
-  ];
+      id:2,
+      name:'The Family',
+    }
+  ]
+  
 
   return (
     <aside className="sidebar-container">
@@ -37,35 +46,38 @@ export default function SideBar() {
       <div className="dashboard sidebar-content">
         <h1 className="title">Dashboard</h1>
         <ul className="menu-list list">
-          {dashboard.map((menuItem) => (
-            <li className="menu-item list-item" key={menuItem.id}>
-              <NavLink to={menuItem.to} className="link">
-                {menuItem.label}
-              </NavLink>
-            </li>
-          ))}
+
+          <ItemWrapper title={'chats'} items={groups}/>
+          <ItemWrapper title={'groups'}/>
+          <ItemWrapper title={'continue reading'}/>
+
+          <li className="menu-item list-item-header">
+            <NavLink to={"/profile"} className="link">
+              profile
+            </NavLink>
+          </li>
         </ul>
       </div>
 
       <div className="settings sidebar-content">
         <ul className="settings-list list">
-          <li className="settings-item list-item">
+          <li className="settings-item list-item-header">
             <div className="link">
               <MdGroup size={18} />
               <span>create a group</span>
             </div>
           </li>
-          <li className="settings-item list-item">
+          <li className="settings-item list-item-header">
             <NavLink to={"/settings"} className="link">
               <IoMdSettings size={18} />
               <span>settings</span>
             </NavLink>
           </li>
-          <li className="settings-item list-item">
-            <NavLink to={"/logout"} className="link logout">
+          <li className="settings-item list-item-header">
+            <div className="link logout" onClick={logout}>
               <TbLogout2 className="logout-icon" size={18} />
               <span>log out</span>
-            </NavLink>
+            </div>
           </li>
         </ul>
       </div>

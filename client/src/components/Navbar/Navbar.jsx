@@ -1,14 +1,24 @@
-import menu from "./navMenu";
 import "./navbar.css";
+
+import { GlobalContext } from "../../context/context";
+import menu from "./navMenu";
+
 import { useContext} from "react";
 import { NavLink,useNavigate } from "react-router-dom";
-import { GlobalContext } from "../../context/context";
+import Cookies from 'universal-cookie'
+
+
 import { IoNotificationsOutline } from "react-icons/io5";
 import { MdOutlineAddBox } from "react-icons/md";
+
+const cookies = new Cookies()
+
 
 export default function Navbar() {
   const {user}=useContext(GlobalContext)
   const navigate = useNavigate()
+  const avatar = cookies.get('image')
+  console.log(avatar)
 
   return (
     <nav
@@ -41,7 +51,7 @@ export default function Navbar() {
           <button className="login-btn" onClick={()=>navigate('/accounts/login')}>login</button>
           :
          <div className="avatar-container">
-          <img src="" alt="" className="avatar" />
+          <img src={avatar} alt="" className="avatar" />
          </div>
         }
       </div>

@@ -1,16 +1,14 @@
 import { useContext } from "react";
 import Logo from "../../components/logo/Logo";
 import "./forms.css";
-import { Link, useNavigate} from "react-router-dom";
 import { GlobalContext } from "../../context/context";
 
 export default function Form() {
-  const {isSignup,setIsSignUp} = useContext(GlobalContext)
-  const navigate = useNavigate()
+  const {setIsSignUp,setIsGetStarted} = useContext(GlobalContext)
 
   const changeForm=()=>{
-    setIsSignUp(isSignup ? false : true)
-    navigate('/account')
+    setIsGetStarted(false)
+    setIsSignUp(false)
   }
 
   return (
@@ -39,13 +37,13 @@ export default function Form() {
               />
               <span>Continue with Apple</span>
             </div>
-            <Link to={'/account'} className="toSignup">
+            <span onClick={()=>setIsGetStarted(false)} className="toSignup">
                 <div className="wrapper">
                   <span>Continue with Email</span>
                 </div>
-            </Link>
-            <p>terms and conditions apply</p>
-            <p>
+            </span>
+            <p className="form-text">terms and conditions apply</p>
+            <p className="form-text">
               Already have an account?{" "}
               <span onClick={changeForm} className="link">
                 Log in
