@@ -15,7 +15,6 @@ const client = StreamChat.getInstance(apiKey);
 const cookies = new Cookies();
 
 const userId = cookies.get("userId");
-console.log(userId);
 
 const Chatbox = () => {
   const { selectedGroup } = useContext(GlobalContext);

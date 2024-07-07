@@ -11,38 +11,34 @@ import Logo from "../logo/Logo";
 import Searchbar from "../Searchbar/Searchbar";
 import ItemWrapper from "./itemContainer";
 
-
 const cookies = new Cookies();
 
 export default function SideBar() {
-  
   const navigate = useNavigate();
 
   // when logging out delete all the saved cookies  then navigate to the get started page
   const logout = () => {
     cookies.remove("token");
     cookies.remove("userId");
-    cookies.remove("email"), 
-    cookies.remove("hashedPassword");
-    cookies.remove("name")
-    cookies.remove("image")
-    cookies.remove("profile Token")
+    cookies.remove("email"), cookies.remove("hashedPassword");
+    cookies.remove("name");
+    cookies.remove("image");
+    cookies.remove("profile Token");
 
     navigate("/get-started");
     window.location.reload();
   };
-  
+
   const groups = [
     {
-      id:1,
-      name:'mothers',
+      id: 1,
+      name: "mothers",
     },
     {
-      id:2,
-      name:'The Family',
-    }
-  ]
-  
+      id: 2,
+      name: "The Family",
+    },
+  ];
 
   return (
     <aside className="sidebar-container">
@@ -51,10 +47,9 @@ export default function SideBar() {
       <div className="dashboard sidebar-content">
         <h1 className="title">Dashboard</h1>
         <ul className="menu-list list">
-
-          <ItemWrapper title={'chats'} items={groups}/>
-          <ItemWrapper title={'groups'}/>
-          <ItemWrapper title={'continue reading'}/>
+          <ItemWrapper title={"chats"} items={groups} />
+          <ItemWrapper title={"groups"} />
+          <ItemWrapper title={"continue reading"} />
 
           <li className="menu-item list-item-header">
             <NavLink to={"/profile"} className="link">
@@ -67,10 +62,12 @@ export default function SideBar() {
       <div className="settings sidebar-content">
         <ul className="settings-list list">
           <li className="settings-item list-item-header">
-            <div className="link">
-              <MdGroup size={18} />
-              <span>create a group</span>
-            </div>
+            <NavLink to={"/create-group"} className="link">
+              <div className="link">
+                <MdGroup size={18} />
+                <span>create a group</span>
+              </div>
+            </NavLink>
           </li>
           <li className="settings-item list-item-header">
             <NavLink to={"/settings"} className="link">

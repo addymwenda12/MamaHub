@@ -2,7 +2,8 @@ const { connect } = require("getstream");
 const bcrypt = require("bcrypt");
 const StreamChat = require("stream-chat").StreamChat;
 const crypto = require("crypto");
-const Users = require('../model/users')
+const Users = require("../model/users");
+const Groups = require("../model/groups");
 
 require("dotenv").config();
 
@@ -20,7 +21,7 @@ const passwordReq = [
 
 const signup = async (req, res) => {
   const { email, password, confirmPassword } = req.body;
-  const currentDate = new Date()
+  const currentDate = new Date();
 
   //validation of values
   if (!isValidEmail(email)) {
@@ -84,22 +85,22 @@ const createProfile = async (req, res) => {
 
     //update user info in database
     const updateUser = await Users.updateOne(
-        { userId },
-        {
-          $set: {
-            avatar,
-            name,
-            dateOfBirth: date,
-            bio,
-            gender,
-            profileToken: updateToken,
-          },
-        }
-      );
-  
-      if (updateUser.matchedCount === 0) {
-        return res.status(404).json({ message: ["User not found"] });
+      { userId },
+      {
+        $set: {
+          avatar,
+          name,
+          dateOfBirth: date,
+          bio,
+          gender,
+          profileToken: updateToken,
+        },
       }
+    );
+
+    if (updateUser.matchedCount === 0) {
+      return res.status(404).json({ message: ["User not found"] });
+    }
 
     //update stream user database
     const update = {
@@ -175,6 +176,81 @@ const login = async (req, res) => {
   }
 };
 
+const createGroup = async (req, res) => {
+  const { avatar, banner, name, description, members, topics,userId } = req.body;
+  const currentDate = new Date();
+  const client = StreamChat.getInstance(api_key, api_secret);
+
+  try {
+    //check if the group exists in the database
+    const existsingGroup = await Groups.findOne({ name: name });
+
+    if (existsingGroup) {
+      return res.status(404).json({ message: ["group name already taken"] });
+    }
+
+    //create a random groupID
+    const groupId = crypto.randomBytes(16).toString("hex");
+
+    //create group in database
+    const newGroup = new Groups({
+      avatar,
+      banner,
+      name,
+      description,
+      members,
+      topics,
+      created_by:userId,
+      date: currentDate,
+    });
+    try {
+      await newGroup.save();
+    } catch (err) {
+      console.log(e);
+      return res
+        .status(500)
+        .json({ message: ["unable to save group to database"] });
+    }
+
+    const formattedMembers = members.map(member => ({ user: { id: member.userId } }));
+
+    const channel = client.channel("messaging", groupId, {
+      image:avatar,
+      banner:banner,
+      name:name,
+      description:description,
+      members:formattedMembers,
+      topics:topics,
+      created_by_id:userId
+    });
+    await channel.create();
+
+    res.status(200).json({ message: "channel created successfully" });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({ message: ["unable to create group"] });
+  }
+};
+
+const search = async (req, res) => {
+  const { query } = req.query; // Use req.query for GET request parameters
+
+  try {
+    // Check if users exist in the database with a name similar to the query
+    const users = await Users.find({ name: new RegExp(query, "i") }); // Use RegExp for case-insensitive search
+
+    if (!users.length) {
+      return res.status(404).json({ message: "User does not exist" });
+    }
+
+    res.status(200).json({ users });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Failed to search users" });
+  }
+};
+
 //VALIDATION FUNCTIONS
 
 // Function to validate email format
@@ -190,4 +266,4 @@ function isValidPassword(password) {
   return passwordRegex.test(password);
 }
 
-module.exports = { signup, login, createProfile };
+module.exports = { signup, login, createProfile, createGroup, search };

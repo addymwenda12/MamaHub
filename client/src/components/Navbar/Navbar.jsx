@@ -18,7 +18,6 @@ export default function Navbar() {
   const {user}=useContext(GlobalContext)
   const navigate = useNavigate()
   const avatar = cookies.get('image')
-  console.log(avatar)
 
   return (
     <nav

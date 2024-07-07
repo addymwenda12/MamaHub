@@ -9,6 +9,7 @@ import Cookies from "universal-cookie";
 import { Navbar, Sidebar, Main, Footer,Chatbox } from "./components";
 import {FormsContainer,CreateProfile,Home, Group} from './pages'
 import { GlobalContext } from "./context/context";
+import CreateGroup from "./pages/forms/CreateGroup";
 
 const cookies = new Cookies();
 
@@ -28,7 +29,6 @@ if (authToken) {
     authToken
   );
 }
-console.log(cookies.get('profile Token'))
 
 function App() {
   
@@ -71,6 +71,7 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/groups" element={<Group/>} />
+                    <Route path="/create-group" element={<CreateGroup/>}/>
                   </Routes>
                 </div>
               }

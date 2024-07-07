@@ -1,6 +1,8 @@
-import { useContext } from "react";
-import Logo from "../../components/logo/Logo";
 import "./forms.css";
+
+import { useContext } from "react";
+
+import Logo from "../../components/logo/Logo";
 import { GlobalContext } from "../../context/context";
 
 export default function Form() {

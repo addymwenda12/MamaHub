@@ -1,28 +1,9 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { FaSearch } from "react-icons/fa";
 import './Searchbar.css'
-import { useState } from "react";
 
 
-const Searchbar = () => {
-  const [query,setQuery]=useState('')
-  const [loading,setLoading]=useState('')
-
-  const onSearch = (e)=>{
-    e.preventDefault()
-
-    setLoading(true)
-    setQuery(e.target.value)
-    getGroups(e.target.value)
-  }
-  const getGroups = async (value)=>{
-    try{
-      console.log(value)
-    }catch(err){
-      console.log(err)
-      setQuery('')
-    }
-  }
+const Searchbar = ({query,onSearch}) => {
   
   return (
     <div>
