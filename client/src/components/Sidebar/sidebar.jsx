@@ -1,13 +1,15 @@
 import "./sidebar.css";
+
 import { NavLink, useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+
 import { IoMdSettings } from "react-icons/io";
 import { MdGroup } from "react-icons/md";
 import { TbLogout2 } from "react-icons/tb";
+
 import Logo from "../logo/Logo";
 import Searchbar from "../Searchbar/Searchbar";
 import ItemWrapper from "./itemContainer";
-
-import Cookies from "universal-cookie";
 
 
 const cookies = new Cookies();
@@ -15,6 +17,8 @@ const cookies = new Cookies();
 export default function SideBar() {
   
   const navigate = useNavigate();
+
+  // when logging out delete all the saved cookies  then navigate to the get started page
   const logout = () => {
     cookies.remove("token");
     cookies.remove("userId");
@@ -27,6 +31,7 @@ export default function SideBar() {
     navigate("/get-started");
     window.location.reload();
   };
+  
   const groups = [
     {
       id:1,

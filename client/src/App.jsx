@@ -13,6 +13,7 @@ import { GlobalContext } from "./context/context";
 const cookies = new Cookies();
 
 const apiKey = "q4yxdb8badm6";
+//authToken is used to check if the user is logged in or has signed up
 const authToken = cookies.get("token");
 
 const client = StreamChat.getInstance(apiKey);
@@ -33,6 +34,7 @@ function App() {
   
   const {isGroupSelected}=useContext(GlobalContext)
 
+  //check if the user is logged in if not sends them to the get started page to log in or create an account
   if (!authToken) {
     return (
       <section className="App">
@@ -46,6 +48,9 @@ function App() {
   return (
     <section className="App">  
       <section className="body">
+        {/* the profile token is used to check if the user has updated their profile
+          available in cookies when creating the profile or logging in; saved in the database
+        */}
         {
          cookies.get('profile Token') === undefined ? 
          <Routes>
@@ -58,6 +63,7 @@ function App() {
             <div style={{ flex: 1}}>
               <Navbar />
               {
+                // check if a group is selected from the sidebar if selected then show the chatbox else other content
                 isGroupSelected ? 
                 <Chatbox/>
                 :
