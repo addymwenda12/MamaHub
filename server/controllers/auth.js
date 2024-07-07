@@ -13,6 +13,7 @@ const signup = async (req, res) => {
     try {
         const { email,password,confirmPassword } = req.body;
 
+        //create a random userID 
         const userId = crypto.randomBytes(16).toString('hex');
 
         const serverClient = connect(api_key, api_secret, app_id);
@@ -47,6 +48,7 @@ const createProfile = async (req, res) => {
         };
 
         const response = await client.partialUpdateUser(update);
+        
         const updatedUser = response.users[userId];
         const profileToken = updatedUser.profileToken
 
@@ -74,6 +76,7 @@ const login = async (req, res) => {
         
         const {id,profileToken,avatar} = users[0]
 
+        //check if the user has the following properties so as to determine if the user has created their profile
         if(users[0].hasOwnProperty('name' || 'bio' || 'avatar')){
        
             const token = serverClient.createUserToken(users[0].id);

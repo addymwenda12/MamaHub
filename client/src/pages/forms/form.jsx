@@ -1,11 +1,14 @@
 import "./forms.css";
+
 import { useContext, useState} from "react";
 import axios from "axios";
-import { FaRegUser, FaLock } from "react-icons/fa6";
-import Logo from "../../components/logo/Logo";
-import { GlobalContext } from "../../context/context";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
+
+import { FaRegUser, FaLock } from "react-icons/fa6";
+
+import Logo from "../../components/logo/Logo";
+import { GlobalContext } from "../../context/context";
 
 const cookies = new Cookies();
 const initialState = {
@@ -27,6 +30,9 @@ export default function Signup() {
     console.log(form);
   };
 
+  // after logging in or signing up check the page the user is in
+  // if in signup page, move to creating a profile
+  //if in login page , move to home page
   const reloadWindow=()=>{
     isSignup ? 
     navigate('/create-profile')
@@ -53,11 +59,11 @@ export default function Signup() {
       cookies.set("token", result.token);
       cookies.set("email", result.email);
       cookies.set("userId", result.userId);
+      
+      //set the cookies only when logging in so as to avoid cookies being set as undefined 
       if(!isSignup){
         cookies.set('profile Token',result.profileToken)
         cookies.set('image',result.avatar)
-      }else{
-        cookies.set("hashedPassword",result.hashedPassword);
       }
 
     reloadWindow()
@@ -141,7 +147,7 @@ export default function Signup() {
             </p>
             {error ? (
               <div className="error-message">
-                {error}
+                <span>{error}</span>
               </div>
             ) : null}
           </div>

@@ -208,3 +208,14 @@
 .react-datepicker-ignore-onclickoutside{
     border: 0;outline: 0;
 }
+.error-message{
+    padding: 10px 15px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    background-color:#FFB7C5;
+}
+.error-message span{
+    color:#FF0800;
+    font-weight: 500;
+    font-size: .8rem;
+}

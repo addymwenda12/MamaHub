@@ -1,4 +1,5 @@
 import "./forms.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +9,6 @@ import moment from "moment";
 import DatePicker from "react-datepicker";
 
 import Logo from "../../components/logo/Logo";
-import "react-datepicker/dist/react-datepicker.css";
 
 import { FaRegUser } from "react-icons/fa6";
 
@@ -29,7 +29,6 @@ export default function CreateProfile() {
   const navigate = useNavigate();
 
   const userID = cookies.get('userId')
-  console.log(userID)
 
   const handleChange = (e) => {
     if (e && e.target) {
