@@ -1,13 +1,13 @@
 import { useContext} from 'react'
 import Form from './GetStarted'
-import Signup from './Form'
+import Signup from './form'
 import { GlobalContext } from '../../context/context'
 
 const FormsContainer = () => {
     const {isGetStrated}=useContext(GlobalContext)
     console.log(isGetStrated)
   {
-    if(isGetStrated){
+    if(isGetStarted){
         return <Form/>
     }else{
         return <Signup/>

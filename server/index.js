@@ -1,10 +1,15 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 
 const authRoutes = require("./routes/auth.js");
 
 const app = express();
+
+/* DATABASE */
 const PORT = process.env.PORT || 5000;
+mongoose.connect(process.env.MONGO_URL)
+.then (() => console.log('Database connected!'))
 
 require('dotenv').config();
 
