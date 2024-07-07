@@ -7,7 +7,7 @@ import Cookies from "universal-cookie";
 
 
 import { Navbar, Sidebar, Main, Footer,Chatbox } from "./components";
-import {FormsContainer,CreateProfile,Home} from './pages'
+import {FormsContainer,CreateProfile,Home, Group} from './pages'
 import { GlobalContext } from "./context/context";
 
 const cookies = new Cookies();
@@ -60,16 +60,17 @@ function App() {
           <>
         <Main>
             <Sidebar /> 
-            <div style={{ flex: 1}}>
+            <div style={{ flex: 1,overflow:'hidden'}}>
               <Navbar />
               {
                 // check if a group is selected from the sidebar if selected then show the chatbox else other content
                 isGroupSelected ? 
                 <Chatbox/>
                 :
-                <div style={{padding:'0 10px'}}>
+                <div style={{padding:'0 10px',minHeight:'100vh',width:'100%'}}>
                   <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/groups" element={<Group/>} />
                   </Routes>
                 </div>
               }

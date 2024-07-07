@@ -10,15 +10,6 @@ export const menu = [
     {
         label:"learn",
         to:"/learn",
-    },
-    {
-        label:"events",
-        to:"/events",
-    },
-    {
-        label:"find an expert",
-        to:"/find-an-expert",
-    },
-   
+    } 
 ]
 export default menu;
