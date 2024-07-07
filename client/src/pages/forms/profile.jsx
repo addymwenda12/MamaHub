@@ -28,7 +28,7 @@ export default function CreateProfile() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const userID = cookies.get('userId')
+  const userID = cookies.get("userId");
 
   const handleChange = (e) => {
     if (e && e.target) {
@@ -53,7 +53,7 @@ export default function CreateProfile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { avatar, name, date, bio, gender, } = form;
+    const { avatar, name, date, bio, gender } = form;
 
     try {
       setLoading(true);
@@ -65,15 +65,15 @@ export default function CreateProfile() {
           date,
           bio,
           gender,
-          userId:userID
+          userId: userID,
         }
       );
       const result = await response.data;
-      console.log(result)
+      console.log(result);
 
       cookies.set("name", result.name);
       cookies.set("image", result.avatar);
-      cookies.set("profile Token", result.profileToken)
+      cookies.set("profile Token", result.profileToken);
 
       reloadWindow();
     } catch (err) {
@@ -209,7 +209,15 @@ export default function CreateProfile() {
               create
             </button>
           </div>
-          {error ? <div className="error-message">{error}</div> : null}
+          {error ? (
+            <div className="error-message">
+              <ul className="error-list">
+                {error.map((errorItem, index) => (
+                  <li key={index}>{errorItem}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="background"></div>

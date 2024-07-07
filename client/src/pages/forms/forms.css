@@ -214,7 +214,10 @@
     border-radius: 10px;
     background-color:#FFB7C5;
 }
-.error-message span{
+.error-list{
+    list-style-position: inside;
+}
+.error-list li{
     color:#FF0800;
     font-weight: 500;
     font-size: .8rem;

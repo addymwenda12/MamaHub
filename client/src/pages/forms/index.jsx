@@ -7,7 +7,7 @@ const FormsContainer = () => {
     const {isGetStrated}=useContext(GlobalContext)
     console.log(isGetStrated)
   {
-    if(isGetStarted){
+    if(isGetStrated){
         return <Form/>
     }else{
         return <Signup/>

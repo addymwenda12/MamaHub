@@ -1,6 +1,6 @@
 import "./forms.css";
 
-import { useContext, useState} from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
@@ -22,8 +22,7 @@ export default function Signup() {
   const { isSignup, switchForm } = useContext(GlobalContext);
   const [, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -33,16 +32,14 @@ export default function Signup() {
   // after logging in or signing up check the page the user is in
   // if in signup page, move to creating a profile
   //if in login page , move to home page
-  const reloadWindow=()=>{
-    isSignup ? 
-    navigate('/create-profile')
-    : navigate('/')
-    window.location.reload()
-  }
+  const reloadWindow = () => {
+    isSignup ? navigate("/create-profile") : navigate("/");
+    window.location.reload();
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email,password, confirmPassword } = form;
+    const { email, password, confirmPassword } = form;
 
     try {
       setLoading(true);
@@ -54,20 +51,19 @@ export default function Signup() {
           confirmPassword,
         }
       );
-      const result = await response.data
+      const result = await response.data;
 
       cookies.set("token", result.token);
       cookies.set("email", result.email);
       cookies.set("userId", result.userId);
-      
-      //set the cookies only when logging in so as to avoid cookies being set as undefined 
-      if(!isSignup){
-        cookies.set('profile Token',result.profileToken)
-        cookies.set('image',result.avatar)
+
+      //set the cookies only when logging in so as to avoid cookies being set as undefined
+      if (!isSignup) {
+        cookies.set("profile Token", result.profileToken);
+        cookies.set("image", result.avatar);
       }
 
-    reloadWindow()
-
+      reloadWindow();
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -75,8 +71,6 @@ export default function Signup() {
     }
     setLoading(false);
   };
-
-
 
   return (
     <div className="form">
@@ -147,7 +141,11 @@ export default function Signup() {
             </p>
             {error ? (
               <div className="error-message">
-                <span>{error}</span>
+                <ul className="error-list">
+                  {error.map((errorItem, index) => (
+                    <li key={index}>{errorItem}</li>
+                  ))}
+                </ul>
               </div>
             ) : null}
           </div>
