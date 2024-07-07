@@ -22,7 +22,7 @@ export default function SideBar() {
     cookies.remove("hashedPassword");
     cookies.remove("name")
     cookies.remove("image")
-    cookies.remove("profile token")
+    cookies.remove("profile Token")
 
     navigate("/get-started");
     window.location.reload();

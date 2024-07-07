@@ -41,13 +41,16 @@ const createProfile = async (req, res) => {
                 name:name,
                 DateOfBirth: date,
                 bio:bio,
-                gender:gender
+                gender:gender,
+                profileToken: crypto.randomBytes(16).toString('hex'),
             },
         };
 
         const response = await client.partialUpdateUser(update);
+        const updatedUser = response.users[userId];
+        const profileToken = updatedUser.profileToken
 
-        res.status(200).json({ ...response ,avatar,name});
+        res.status(200).json({ ...updatedUser ,avatar,name,profileToken});
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Failed to update profile' });
@@ -67,14 +70,16 @@ const login = async (req, res) => {
         if(!users.length) return res.status(400).json({ message: 'User not found' });
 
         const success = await bcrypt.compare(password, users[0].hashedPassword);
+        console.log(users[0])
         
-        if(users[0].hasOwnProperty('name' || 'bio')){
+        const {id,profileToken,avatar} = users[0]
+
+        if(users[0].hasOwnProperty('name' || 'bio' || 'avatar')){
        
             const token = serverClient.createUserToken(users[0].id);
-            const profileToken = token
 
             if(success) {
-                res.status(200).json({ token,userId: users[0].id},profileToken);
+                res.status(200).json({ token,userId: id,profileToken: profileToken,email:users[0].email,avatar:avatar});
             } else {
                 res.status(500).json({ message: 'Incorrect password' });
             }

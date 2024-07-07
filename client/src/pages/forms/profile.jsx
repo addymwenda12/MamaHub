@@ -70,10 +70,11 @@ export default function CreateProfile() {
         }
       );
       const result = await response.data;
+      console.log(result)
 
-      cookies.set("profile token", result.name);
       cookies.set("name", result.name);
       cookies.set("image", result.avatar);
+      cookies.set("profile Token", result.profileToken)
 
       reloadWindow();
     } catch (err) {

@@ -53,7 +53,10 @@ export default function Signup() {
       cookies.set("token", result.token);
       cookies.set("email", result.email);
       cookies.set("userId", result.userId);
-      if (isSignup) {
+      if(!isSignup){
+        cookies.set('profile Token',result.profileToken)
+        cookies.set('image',result.avatar)
+      }else{
         cookies.set("hashedPassword",result.hashedPassword);
       }
 

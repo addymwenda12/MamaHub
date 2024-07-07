@@ -27,7 +27,7 @@ if (authToken) {
     authToken
   );
 }
-console.log(cookies.get('profile token'))
+console.log(cookies.get('profile Token'))
 
 function App() {
   
@@ -47,7 +47,11 @@ function App() {
     <section className="App">  
       <section className="body">
         {
-          cookies.get('profile token') !== undefined ? 
+         cookies.get('profile Token') === undefined ? 
+         <Routes>
+           <Route path={"/create-profile"} element={<CreateProfile/>} />
+         </Routes>
+           :
           <>
         <Main>
             <Sidebar /> 
@@ -67,11 +71,7 @@ function App() {
         </Main>
         <Footer />
         </>
-        :
-          <Routes>
-            <Route path={"/create-profile"} element={<CreateProfile/>} />
-          </Routes>
-            }
+}
       </section>
     </section>
   );
