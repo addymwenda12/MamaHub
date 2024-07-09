@@ -7,7 +7,7 @@ import Cookies from "universal-cookie";
 
 
 import { Navbar, Sidebar, Main, Footer,Chatbox } from "./components";
-import {FormsContainer,CreateProfile,Home, Group} from './pages'
+import {FormsContainer,CreateProfile,Home, Group, Landing} from './pages'
 import { GlobalContext } from "./context/context";
 import CreateGroup from "./pages/forms/CreateGroup";
 
@@ -39,6 +39,7 @@ function App() {
     return (
       <section className="App">
           <Routes>
+            <Route path="/landing" element={<Landing/>} />
             <Route path={"/get-started"} element={<FormsContainer />} />
           </Routes>
       </section>

@@ -54,3 +54,37 @@
     top: 2%;right: 2%;
     cursor: pointer;
 }
+
+
+
+.landing-banner-section{
+    height: 350px;
+    display: flex;
+    padding: 0 30px;
+    background-color: #FF4F00;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    color: #FFFFFF;
+}
+.landing-banner-section-text{
+    width: 500px;
+}
+.landing-banner-section-super-text{
+    font-size: 2.5rem;
+    padding-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 40px;
+}
+.landing-banner-section-sub-text{
+    font-size:.9em;
+    font-weight: 400;
+}
+.landing-banner-section-image-container{
+    flex: .5;
+    height: 100%;
+}
+.landing-banner-section-image-container img{
+    height: 100%;width: 100%;
+}
