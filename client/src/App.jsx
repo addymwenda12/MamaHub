@@ -39,7 +39,7 @@ function App() {
     return (
       <section className="App">
           <Routes>
-            <Route path="/landing" element={<Landing/>} />
+            <Route path="/" element={<Landing/>} />
             <Route path={"/get-started"} element={<FormsContainer />} />
           </Routes>
       </section>
@@ -70,7 +70,7 @@ function App() {
                 :
                 <div style={{padding:'0 10px',minHeight:'100vh',width:'100%'}}>
                   <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
                     <Route path="/groups" element={<Group/>} />
                     <Route path="/create-group" element={<CreateGroup/>}/>
                   </Routes>

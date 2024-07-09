@@ -33,7 +33,7 @@ export default function Signup() {
   // if in signup page, move to creating a profile
   //if in login page , move to home page
   const reloadWindow = () => {
-    isSignup ? navigate("/create-profile") : navigate("/");
+    isSignup ? navigate("/create-profile") : navigate("/home");
     window.location.reload();
   };
 

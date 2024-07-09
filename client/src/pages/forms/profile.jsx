@@ -47,7 +47,7 @@ export default function CreateProfile() {
   };
 
   const reloadWindow = () => {
-    navigate("/");
+    navigate("/home");
     window.location.reload();
   };
 
