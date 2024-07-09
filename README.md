@@ -115,8 +115,8 @@ Key MongoDB collections:
 Detailed schema definitions can be found in `server/models/`.
 
 ## Testing
-- Run backend tests: `cd backend && npm run test`
-- Run frontend tests: `cd frontend && npm run test:unit`
+- Run backend tests: `cd server && npm run test`
+- Run frontend tests: `cd client && npm run test:unit`
 
 ## Deployment
 Deployment instructions for various platforms:
@@ -138,8 +138,6 @@ Detailed deployment guides for other platforms can be found in `DEPLOYMENT.md`.
 ## Contributing
 We welcome contributions from the community. Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-## Support
-For help, please email support@motherscircle.com or visit our FAQ page at `http://localhost:8080/faq` when the application is running.
 
 ## Privacy
 We take user privacy seriously. Please review our [Privacy Policy](PRIVACY.md) for information on how we protect and use your data.
