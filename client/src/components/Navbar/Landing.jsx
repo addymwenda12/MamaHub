@@ -36,7 +36,7 @@ export default function Landing() {
       </ul>
 
       <div className="right-section">
-          <button className="login-btn" onClick={()=>navigate('/get-started')}>login</button>
+          <button className="login-btn" onClick={()=>navigate('/get-started')}>sign up</button>
       </div>
     </nav>
   );

@@ -2,6 +2,11 @@ const mongoose = require('mongoose')
 const {Schema} = mongoose
 
 const groupsSchema = new Schema({
+    groupId:{
+        type:String,
+        required: true,
+        unique: true
+    },
     name:{
         type:String,
         required: true,

@@ -19,7 +19,7 @@ export default function Form() {
         <Logo/>
         <div className="form-container">
           <h1 className="form-title">Sign Up</h1>
-          <p>Get started with us</p>
+          <p className="sub-txt">Get started with us</p>
           <div className="form-input-container">
             <div className="wrapper">
               <img

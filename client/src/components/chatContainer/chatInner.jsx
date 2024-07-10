@@ -6,9 +6,7 @@ import {
   Thread,
   Window,
   useChannelActionContext,
-  Avatar,
   useChannelStateContext,
-  useChatContext,
 } from "stream-chat-react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { GlobalContext } from "../../context/context";
@@ -54,7 +52,7 @@ const ChatInner = ({ setIsEditing }) => {
 
 const TeamChannelHeader = () => {
   const { channel, watcher_count } = useChannelStateContext();
-  const { client } = useChatContext();
+  //const { client } = useChatContext();
 
   const getWatcherText = (watchers) => {
     if (!watchers) return "No users online";
@@ -63,11 +61,18 @@ const TeamChannelHeader = () => {
   };
 
   const MessagingHeader = () => {
-    const members = Object.values(channel.state.members).filter(
-      ({ user }) => user.id !== client.userID
-    );
+    const { setIsGroupSelected, setSelectedGroup } = useContext(GlobalContext);
+    const resetSelectedGroup = () => {
+      setIsGroupSelected(false);
+      setSelectedGroup(null);
+    };
+
+    {
+      /* 
+      const members = Object.values(channel.state.members).filter(
+        ({ user }) => user.id !== client.userID
+      );
     const additionalMembers = members.length - 3;
-    const {setIsGroupSelected} = useContext(GlobalContext)
 
     if (channel.type === "messaging") {
       return (
@@ -93,12 +98,14 @@ const TeamChannelHeader = () => {
         </div>
       );
     }
+      */
+    }
 
     return (
       <div className="team-channel-header__channel-wrapper">
         <div className="team-channel-header__name-multi">
           <div className="team-channel-header__avatar">
-            <img src="" alt="" />
+            <img src={channel.data.image} alt="" />
           </div>
           <div className="team-channel-header__name-online">
             <p className="team-channel-header__name">{channel.data.name}</p>
@@ -110,7 +117,12 @@ const TeamChannelHeader = () => {
           </div>
         </div>
         <span className="chat-settings-icon">
-          <IoIosCloseCircleOutline size={20} color="#434343" onClick={()=>setIsGroupSelected(false)} style={{cursor:"pointer"}}/>
+          <IoIosCloseCircleOutline
+            size={20}
+            color="#434343"
+            onClick={() => resetSelectedGroup()}
+            style={{ cursor: "pointer" }}
+          />
         </span>
       </div>
     );

@@ -17,17 +17,16 @@ const cookies = new Cookies();
 const userId = cookies.get("userId");
 
 const Chatbox = () => {
-  const { selectedGroup } = useContext(GlobalContext);
+  const { selectedGroup,setSelectedGroup,setIsGroupSelected} = useContext(GlobalContext);
   const [selectedChannel, setSelectedChannel] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  console.log(selectedGroup.toLowerCase().replace(/\s+/g, ""));
 
   const selectChannel = async () => {
-    if (selectedGroup.length > 0) {
+    if (selectedGroup) {
       const filter = {
-        type: "team",
-        id: selectedGroup.toLowerCase().replace(/\s+/g, ""),
+        type: "messaging",
+        id: selectedGroup.groupId,
         members: { $in: [userId] },
       };
       try {
@@ -76,7 +75,9 @@ const Chatbox = () => {
   }
 
   if (error) {
-    return <div>error</div>;
+    setSelectedGroup(null)
+    setIsGroupSelected(false)
+    return <div>error loading group</div>;
   }
   return (
     <div className="chat-wrapper">

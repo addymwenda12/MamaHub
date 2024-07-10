@@ -34,6 +34,9 @@ const usersSchema = new Schema({
     profileToken:{
         type:String
     },
+    groups:{
+        type:Object
+    },
     date:{
         type: Date,
         default : Date.now

@@ -7,7 +7,7 @@ export default function GlobalState({ children }) {
   const [isSignup, setIsSignUp] = useState(true);
   const [isGetStrated, setIsGetStarted] = useState(true);
   const [isGroupSelected, setIsGroupSelected] = useState(false);
-  const [selectedGroup, setSelectedGroup] = useState('')
+  const [selectedGroup, setSelectedGroup] = useState(null)
   const [signupData, setSignupData] = useState({
     email: "",
     password: "",

@@ -35,6 +35,9 @@
     color: #111;
     text-align: center;
 }
+.sub-txt{
+    text-align: center;
+}
 .form .form-text{
     font-weight: 400;
     color: #434343;

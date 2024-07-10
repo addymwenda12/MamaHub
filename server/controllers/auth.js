@@ -140,11 +140,12 @@ const login = async (req, res) => {
     const client = StreamChat.getInstance(api_key, api_secret);
 
     const { users } = await client.queryUsers({ email: email });
+    console.log(user)
 
     if (!users.length)
       return res.status(400).json({ message: ["User not found"] });
 
-    const success = await bcrypt.compare(password, users[0].hashedPassword);
+    const success = await bcrypt.compare(password, user.password);
     console.log(users[0]);
 
     const { id, profileToken, avatar } = users[0];
@@ -172,7 +173,7 @@ const login = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res.status(500).json({ message: error });
+    res.status(500).json({ message: ["unable to log in"] });
   }
 };
 
@@ -191,14 +192,16 @@ const createGroup = async (req, res) => {
 
     //create a random groupID
     const groupId = crypto.randomBytes(16).toString("hex");
+    const allMembers = [...members, { userId }]
 
     //create group in database
     const newGroup = new Groups({
+      groupId,
       avatar,
       banner,
       name,
       description,
-      members,
+      members:allMembers,
       topics,
       created_by:userId,
       date: currentDate,
@@ -211,8 +214,28 @@ const createGroup = async (req, res) => {
         .status(500)
         .json({ message: ["unable to save group to database"] });
     }
+    const formattedMembers = allMembers.map(member => (
+       { user: { id: member.userId } }
+    ));
 
-    const formattedMembers = members.map(member => ({ user: { id: member.userId } }));
+    const addGroupsToUserDb = async () => {
+      const allMembers = [...members, { userId }]; 
+      const updatePromises =allMembers.map(member => (
+        Users.updateOne(
+          { userId: member.userId },
+          { $addToSet: { groups: groupId } }  // $addToSet ensures no duplicates
+        )
+      ));
+      await Promise.all(updatePromises); // Wait for all updates to complete
+    };
+
+    try {
+      await addGroupsToUserDb();
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: ["Unable to update user groups in database"] });
+    }
+
 
     const channel = client.channel("messaging", groupId, {
       image:avatar,
@@ -251,6 +274,40 @@ const search = async (req, res) => {
   }
 };
 
+const getAllGroupsJoined = async (req, res) => {
+  const { userId } = req.query;
+
+  try {
+    // Find the user by their userId
+    const user = await Users.findOne({ userId: userId });
+
+    console.log(user)
+    if (!user) {
+      return res.status(404).json({ message: "User does not exist" });
+    }
+
+    // Retrieve group details for the groups the user has joined
+    const groups = await Groups.find({ groupId: { $in: user.groups } });
+
+    return res.status(200).json(groups);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+const getAllGroups = async(req,res)=>{
+  try{
+    const groups = await Groups.find()
+
+    if(groups.length < 0){
+      return res.status(200).json({message:'no groups found'})
+    }
+    return res.status(200).json(groups)
+  }catch(err){
+    console.log(err)
+    return res.status(500).json({message:'unable to get groups'})
+  }
+}
 //VALIDATION FUNCTIONS
 
 // Function to validate email format
@@ -266,4 +323,4 @@ function isValidPassword(password) {
   return passwordRegex.test(password);
 }
 
-module.exports = { signup, login, createProfile, createGroup, search };
+module.exports = { signup, login, createProfile, createGroup, search,getAllGroupsJoined,getAllGroups };

@@ -43,7 +43,7 @@ export default function CreateGroup() {
   };
 
   const reloadWindow = () => {
-    navigate("/");
+    navigate("/home");
     window.location.reload();
   };
 
@@ -205,7 +205,7 @@ export default function CreateGroup() {
                 name="avatar"
                 id="avatar"
                 className="form-input"
-                placeholder="enter avatar url"
+                placeholder="enter banner url"
                 onChange={handleChange}
               />
             </div>

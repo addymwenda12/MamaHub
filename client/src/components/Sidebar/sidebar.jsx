@@ -1,7 +1,9 @@
 import "./sidebar.css";
 
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import axios from "axios";
 
 import { IoMdSettings } from "react-icons/io";
 import { MdGroup } from "react-icons/md";
@@ -11,16 +13,34 @@ import Logo from "../logo/Logo";
 import Searchbar from "../Searchbar/Searchbar";
 import ItemWrapper from "./itemContainer";
 
+
+
 const cookies = new Cookies();
 
 export default function SideBar() {
   const navigate = useNavigate();
+  const userId = cookies.get('userId')
+  const [groups,setGroups]= useState([])
+
+
+
+  const getAllGroups = async()=>{
+    const response = await axios.get('http://localhost:5000/api/get-groups', {
+      params: { userId }
+    });
+    setGroups(response.data)
+  }
+  console.log(groups)
+  useEffect(()=>{
+    getAllGroups()
+  },[userId])
 
   // when logging out delete all the saved cookies  then navigate to the get started page
   const logout = () => {
     cookies.remove("token");
     cookies.remove("userId");
-    cookies.remove("email"), cookies.remove("hashedPassword");
+    cookies.remove("email"), 
+    cookies.remove("hashedPassword");
     cookies.remove("name");
     cookies.remove("image");
     cookies.remove("profile Token");
@@ -29,16 +49,6 @@ export default function SideBar() {
     window.location.reload();
   };
 
-  const groups = [
-    {
-      id: 1,
-      name: "mothers",
-    },
-    {
-      id: 2,
-      name: "The Family",
-    },
-  ];
 
   return (
     <aside className="sidebar-container">
@@ -47,8 +57,8 @@ export default function SideBar() {
       <div className="dashboard sidebar-content">
         <h1 className="title">Dashboard</h1>
         <ul className="menu-list list">
-          <ItemWrapper title={"chats"} items={groups} />
-          <ItemWrapper title={"groups"} />
+          <ItemWrapper title={"chats"}  />
+          <ItemWrapper title={"groups"} items={groups}/>
           <ItemWrapper title={"continue reading"} />
 
           <li className="menu-item list-item-header">

@@ -13,17 +13,18 @@ const ItemWrapper = ({title,items=[]})=>{
 }
 
 const ItemContainer = ({items}) => {
-const {setSelectedGroup,setIsGroupSelected}=useContext(GlobalContext)
+const {selectedGroup,setSelectedGroup,setIsGroupSelected}=useContext(GlobalContext)
 const selectGroup = (value)=>{
   setSelectedGroup(value)
   setIsGroupSelected(true)
 }
+console.log(selectedGroup)
 
   return (
     <ul className="joined-wrapper">
       {
         items.map((item)=>{
-           return <li className="joined-item" key={item.id} onClick={()=>selectGroup(item.name)}>{item.name}</li>
+           return <li className="joined-item" key={item._id} onClick={()=>selectGroup(item)}>{item.name}</li>
         })
       }
     </ul>

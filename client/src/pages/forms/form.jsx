@@ -61,6 +61,8 @@ export default function Signup() {
       if (!isSignup) {
         cookies.set("profile Token", result.profileToken);
         cookies.set("image", result.avatar);
+      }else{
+        cookies.set("hashed password", result.hashedPassword);
       }
 
       reloadWindow();
