@@ -35,6 +35,7 @@ MamaHub is a comprehensive online platform designed to support mothers at all st
 
 ## Technology Stack
 
+- **Design**: Figma
 - **Backend**: Node.js with Express.js
 - **Frontend**: React.js
 - **Database**: MongoDB
@@ -120,6 +121,8 @@ git clone https://github.com/addymwenda12/MamaHub.git
 API documentation is available at `http://localhost:5000/api-docs` when the backend server is running.
 
 ## Frontend Structure
+
+Designs for the user interface are available at `https://www.figma.com/design/6riXBDQkMQLlLmfbAsAlh7/MamaHub?node-id=0-1&t=acKq8nyBvWIvGzFm-1`.
 
 The React.js frontend is organized as follows:
 
