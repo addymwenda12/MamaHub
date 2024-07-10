@@ -176,3 +176,6 @@ MamaHub is licensed under the [MIT License](LICENSE.md).
 om.
 
 Join MamaHub today and be part of a community that understands and supports the beautiful journey of motherhood!
+
+NOTE!
+The current version of mamahub is yet to be completed.
