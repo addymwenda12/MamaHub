@@ -47,7 +47,7 @@ export default function GlobalState({ children }) {
       const response = await api.post('/auth/signup', signupData);
       localStorage.setItem('token', response.data.token);
       setUser(response.data.user);
-      navigate('/');
+      navigate('/accounts/login');
     } catch (error) {
       setError(error.response.data.message);
     } finally {
