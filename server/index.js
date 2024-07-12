@@ -12,7 +12,7 @@ import authRoutes from './routes/auth.js';
 import userRoutes from './routes/userRoutes.js';
 import User from './models/User.js';
 import postRoutes from './routes/posts.js';
-import { register } from './controllers/auth.js';
+import { signup } from './controllers/auth.js';
 import { verifyToken } from './middleware/auth.js';
 import commentRoutes from './routes/commentRoutes.js'
 
@@ -54,10 +54,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 /* ROUTES WITH FILES */
-app.post("/auth/register", upload.single("picture"), register);
+// app.post("/auth/register", upload.single("picture"), register);
 
 /* ROUTES */
-app.use("/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 app.use("/comments", commentRoutes);

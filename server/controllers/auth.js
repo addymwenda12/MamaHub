@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
 /* REGISTER */
-export const register = async (req, res) => {
+export const signup = async (req, res) => {
 	try {
 		const {
 			firstName,
