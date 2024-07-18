@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom'
 import './style.css'
 
 const topics = [
@@ -6,8 +8,9 @@ const topics = [
     'mental health'
 ]
 
-const GroupContainer = () => {
+const GroupContainer = ({id}) => {
   return (
+    <Link to={`/group/profile/${id}`}>
     <section className="group-container">
         <div className="profile-image-conatiner">
             <img src="../../images/image-forms.jpg" alt="group profile" />
@@ -37,6 +40,7 @@ const GroupContainer = () => {
         </div>
       
     </section>
+    </Link>
   )
 }
 

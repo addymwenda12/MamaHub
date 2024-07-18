@@ -140,13 +140,11 @@ const login = async (req, res) => {
     const client = StreamChat.getInstance(api_key, api_secret);
 
     const { users } = await client.queryUsers({ email: email });
-    console.log(user)
 
     if (!users.length)
       return res.status(400).json({ message: ["User not found"] });
 
     const success = await bcrypt.compare(password, user.password);
-    console.log(users[0]);
 
     const { id, profileToken, avatar } = users[0];
 
@@ -280,8 +278,6 @@ const getAllGroupsJoined = async (req, res) => {
   try {
     // Find the user by their userId
     const user = await Users.findOne({ userId: userId });
-
-    console.log(user)
     if (!user) {
       return res.status(404).json({ message: "User does not exist" });
     }

@@ -2,7 +2,7 @@
 import "./itemContainer.css";
 import { IoMdAddCircleOutline } from "react-icons/io";
 
-const ItemContainer = ({avatar,name,categories,description}) => {
+const ItemContainer = ({avatar,name,categories}) => {
   return (
     <div className="item-container">
       <div className="user-Avatar-container">
@@ -21,9 +21,11 @@ const ItemContainer = ({avatar,name,categories,description}) => {
             return item
           }).join(', ')
           }</p>
+        {/*  
         <p className="description">
           {description}
         </p>
+        */}
       </div>
     </div>
   );

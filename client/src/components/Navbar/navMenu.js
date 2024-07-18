@@ -1,7 +1,7 @@
 export const menu = [
     {
         label:"home",
-        to:"/",
+        to:"/home",
     },
     {
         label:"groups",
@@ -15,7 +15,7 @@ export const menu = [
 export const landingMenu = [
     {
         label:"home",
-        to:"/",
+        to:"/home",
     },
     {
         label:"about",

@@ -24,7 +24,7 @@
 }
 .user-details-wrapper .header{
     display: flex;
-    align-items: center;
+    align-items: top;
     justify-content: space-between;
     gap: 20px;
     margin-bottom: 8px;
@@ -33,6 +33,7 @@
     font-size: 1.2rem;
     font-weight: 600;
     color: #111;
+    text-transform: capitalize;
 }
 .user-details-wrapper .header .follow-btn{
     background-color: #FF4F00;
@@ -46,6 +47,7 @@
     font-size: .7rem;
     font-weight: 500;
     cursor: pointer;
+    max-height: 29px;
 }
 .user-details-wrapper .categories{
     font-size: 9px;

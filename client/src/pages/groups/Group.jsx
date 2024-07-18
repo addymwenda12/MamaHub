@@ -7,43 +7,43 @@ const Group = () => {
       <div className="group-section-wrapper">
         <h1 className="groups-section-title">Early pregnancy</h1>
         <div className="groups-wrapper">
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
+          <GroupContainer id={1}/>
+          <GroupContainer id={1}/>
+          <GroupContainer id={1}/>
+          <GroupContainer id={1}/>
+          <GroupContainer id={1}/>
+          <GroupContainer id={1}/>
+          <GroupContainer id={1}/>
+          <GroupContainer id={1}/>
+          <GroupContainer id={1}/>
         </div>
       </div>
       <div className="group-section-wrapper">
         <h1 className="groups-section-title">Early pregnancy</h1>
         <div className="groups-wrapper">
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
         </div>
       </div>
       <div className="group-section-wrapper">
         <h1 className="groups-section-title">Early pregnancy</h1>
         <div className="groups-wrapper">
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
-          <GroupContainer />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
+          <GroupContainer id={1} />
         </div>
       </div>
     </section>

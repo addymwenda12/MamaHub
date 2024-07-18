@@ -40,17 +40,17 @@ const Home = () => {
                 view more
               </Link>
             </div>
-            {groups.map((group) => {
+            {groups.slice(0,5).map((group) => {
               return (
                 <ItemContainer
                   avatar={group.avatar}
                   name={group.name}
                   categories={group.topics}
-                  description={group.description}
                   key={group._id}
                 />
               );
-            })}
+            })
+}
           </section>
         ) : null}
       </div>

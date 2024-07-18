@@ -10,6 +10,7 @@ import { Navbar, Sidebar, Main, Footer,Chatbox } from "./components";
 import {FormsContainer,CreateProfile,Home, Group, Landing} from './pages'
 import { GlobalContext } from "./context/context";
 import CreateGroup from "./pages/forms/CreateGroup";
+import GroupProfile from "./pages/group-profile/GroupProfile";
 
 const cookies = new Cookies();
 
@@ -73,6 +74,7 @@ function App() {
                     <Route path="/home" element={<Home />} />
                     <Route path="/groups" element={<Group/>} />
                     <Route path="/create-group" element={<CreateGroup/>}/>
+                    <Route path="/group/profile/:id" element={<GroupProfile/>}/>
                   </Routes>
                 </div>
               }
