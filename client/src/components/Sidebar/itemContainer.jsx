@@ -13,12 +13,11 @@ const ItemWrapper = ({title,items=[]})=>{
 }
 
 const ItemContainer = ({items}) => {
-const {selectedGroup,setSelectedGroup,setIsGroupSelected}=useContext(GlobalContext)
+const {setSelectedGroup,setIsGroupSelected}=useContext(GlobalContext)
 const selectGroup = (value)=>{
   setSelectedGroup(value)
   setIsGroupSelected(true)
 }
-console.log(selectedGroup)
 
   return (
     <ul className="joined-wrapper">

@@ -19,7 +19,6 @@ const Home = () => {
   useEffect(() => {
     getAllGroups();
   }, []);
-  console.log(groups)
 
   return (
     <section className="Home-page">

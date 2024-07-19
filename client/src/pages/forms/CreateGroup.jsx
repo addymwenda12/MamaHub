@@ -18,7 +18,7 @@ const initialState = {
   avatar:
     "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg",
   banner:
-    "https://t4.ftcdn.net/jpg/05/72/54/67/360_F_572546714_2mn39TUv2f5Lmg7JRT9yvSkuTJERGyg8.jpg",
+    "https://images.unsplash.com/photo-1548869447-faef5000334c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   name: "",
   description: "",
   members: [],
@@ -202,8 +202,8 @@ export default function CreateGroup() {
               <FaRegUser size={16} className="user-icon icon" />
               <input
                 type="text"
-                name="avatar"
-                id="avatar"
+                name="banner"
+                id="banner"
                 className="form-input"
                 placeholder="enter banner url"
                 onChange={handleChange}

@@ -176,7 +176,8 @@ const login = async (req, res) => {
 };
 
 const createGroup = async (req, res) => {
-  const { avatar, banner, name, description, members, topics,userId } = req.body;
+  const { avatar, banner, name, description, members, topics, userId } =
+    req.body;
   const currentDate = new Date();
   const client = StreamChat.getInstance(api_key, api_secret);
 
@@ -190,7 +191,7 @@ const createGroup = async (req, res) => {
 
     //create a random groupID
     const groupId = crypto.randomBytes(16).toString("hex");
-    const allMembers = [...members, { userId }]
+    const allMembers = [...members, { userId }];
 
     //create group in database
     const newGroup = new Groups({
@@ -199,9 +200,9 @@ const createGroup = async (req, res) => {
       banner,
       name,
       description,
-      members:allMembers,
+      members: allMembers,
       topics,
-      created_by:userId,
+      created_by: userId,
       date: currentDate,
     });
     try {
@@ -212,18 +213,18 @@ const createGroup = async (req, res) => {
         .status(500)
         .json({ message: ["unable to save group to database"] });
     }
-    const formattedMembers = allMembers.map(member => (
-       { user: { id: member.userId } }
-    ));
+    const formattedMembers = allMembers.map((member) => ({
+      user: { id: member.userId },
+    }));
 
     const addGroupsToUserDb = async () => {
-      const allMembers = [...members, { userId }]; 
-      const updatePromises =allMembers.map(member => (
+      const allMembers = [...members, { userId }];
+      const updatePromises = allMembers.map((member) =>
         Users.updateOne(
           { userId: member.userId },
-          { $addToSet: { groups: groupId } }  // $addToSet ensures no duplicates
+          { $addToSet: { groups: groupId } } // $addToSet ensures no duplicates
         )
-      ));
+      );
       await Promise.all(updatePromises); // Wait for all updates to complete
     };
 
@@ -231,18 +232,19 @@ const createGroup = async (req, res) => {
       await addGroupsToUserDb();
     } catch (err) {
       console.error(err);
-      return res.status(500).json({ message: ["Unable to update user groups in database"] });
+      return res
+        .status(500)
+        .json({ message: ["Unable to update user groups in database"] });
     }
 
-
     const channel = client.channel("messaging", groupId, {
-      image:avatar,
-      banner:banner,
-      name:name,
-      description:description,
-      members:formattedMembers,
-      topics:topics,
-      created_by_id:userId
+      image: avatar,
+      banner: banner,
+      name: name,
+      description: description,
+      members: formattedMembers,
+      topics: topics,
+      created_by_id: userId,
     });
     await channel.create();
 
@@ -291,19 +293,33 @@ const getAllGroupsJoined = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
-const getAllGroups = async(req,res)=>{
-  try{
-    const groups = await Groups.find()
+const getAllGroups = async (req, res) => {
+  try {
+    const groups = await Groups.find();
 
-    if(groups.length < 0){
-      return res.status(200).json({message:'no groups found'})
+    if (groups.length < 0) {
+      return res.status(200).json({ message: "no groups found" });
     }
-    return res.status(200).json(groups)
-  }catch(err){
-    console.log(err)
-    return res.status(500).json({message:'unable to get groups'})
+    return res.status(200).json(groups);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "unable to get groups" });
   }
-}
+};
+const getGroupDetails = async (req, res) => {
+  const { id } = req.query;
+  try {
+    const group = await Groups.findOne({ groupId: id });
+    if (!group) {
+      return res.status(200).json({ message: "group not found" });
+    }
+    return res.status(200).json(group);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "unable to get group details" });
+  }
+};
+
 //VALIDATION FUNCTIONS
 
 // Function to validate email format
@@ -319,4 +335,13 @@ function isValidPassword(password) {
   return passwordRegex.test(password);
 }
 
-module.exports = { signup, login, createProfile, createGroup, search,getAllGroupsJoined,getAllGroups };
+module.exports = {
+  signup,
+  login,
+  createProfile,
+  createGroup,
+  search,
+  getAllGroupsJoined,
+  getAllGroups,
+  getGroupDetails,
+};

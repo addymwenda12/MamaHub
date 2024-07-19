@@ -30,7 +30,6 @@ export default function SideBar() {
     });
     setGroups(response.data)
   }
-  console.log(groups)
   useEffect(()=>{
     getAllGroups()
   },[userId])

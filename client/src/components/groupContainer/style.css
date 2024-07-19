@@ -26,10 +26,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 30px;
+    overflow: hidden;
 }
 .group-details-name{
     font-size: 1.1rem;
     font-weight: 500;
+    height: 100%;
 }
 .group-details-status{
     font-weight: 400;
@@ -40,14 +43,22 @@
 }
 .groups-details-topics{
     margin-bottom: 6px;
+    height: 28px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
 }
 .group-details-topics-list{
     text-transform: capitalize;
-    font-size: .64rem;
+    font-size: .53rem;
+    font-weight: 500;
     color: #434343;
     display: inline-block;
+    height: 100%;
 }
 .group-details-description{
-    font-size: .6rem;
+    font-size: .7rem;
     margin-bottom: 5px;
+    height: 30px;
+    overflow: hidden;
 }

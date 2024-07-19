@@ -17,7 +17,6 @@ const Navbar = () => {
       name: "recommendations",
     },
   ];
-  console.log(currentGroupSection);
 
   return (
     <nav className="group-navigation-menu">
