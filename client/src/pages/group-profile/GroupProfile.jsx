@@ -5,6 +5,7 @@ import {
   Journeys,
   Media,
   Recommedations,
+  SuggestedContainer,
 } from "../../components";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
@@ -45,6 +46,19 @@ const GroupProfile = () => {
           ) : currentGroupSection === "recommendations" ? (
             <Recommedations />
           ) : null}
+          <section className="suggested-section">
+            <h1 className="title">suggested</h1>
+            <section className="suggested-section-items">
+              <SuggestedContainer />
+              <SuggestedContainer />
+              <SuggestedContainer />
+              <SuggestedContainer />
+              <SuggestedContainer />
+              <SuggestedContainer />
+              <SuggestedContainer />
+              <SuggestedContainer />
+            </section>
+          </section>
         </section>
       </section>
     );
