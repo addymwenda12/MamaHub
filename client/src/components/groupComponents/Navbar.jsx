@@ -1,11 +1,39 @@
-import './styles.css'
+import { useContext } from "react";
+import "./styles.css";
+import { GlobalContext } from "../../context/context";
 
 const Navbar = () => {
+  const { currentGroupSection, setCurrentGroupSection } =
+    useContext(GlobalContext);
+
+  const items = [
+    {
+      name: "journeys",
+    },
+    {
+      name: "media",
+    },
+    {
+      name: "recommendations",
+    },
+  ];
+  console.log(currentGroupSection);
+
   return (
     <nav className="group-navigation-menu">
-        <button className="group-navigation-button active" >jourenys</button>
-        <button className="group-navigation-button" >media</button>
-        <button className="group-navigation-button">recommendations</button>
+      {items.map((item) => {
+        return (
+          <button
+            className={`group-navigation-button ${
+              currentGroupSection === item.name ? "active" : ""
+            }`}
+            onClick={() => setCurrentGroupSection(item.name)}
+            key={item.name}
+          >
+            {item.name}
+          </button>
+        );
+      })}
     </nav>
   );
 };

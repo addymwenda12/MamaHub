@@ -15,3 +15,26 @@
     background-color: #111;
     color: #FFFFFF;
 }
+
+/* group content section(journeys,media,reccomendations) */
+.group-content-section{
+    min-height: 50vh;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.empty-state{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.empty-state p{
+    font-weight: 600;
+    font-size: 2rem;
+    text-transform: capitalize;
+    color: #545454;
+}
