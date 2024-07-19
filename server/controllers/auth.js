@@ -48,6 +48,10 @@ const signup = async (req, res) => {
     const userId = crypto.randomBytes(16).toString("hex");
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    //create user in getStream
+    const serverClient = connect(api_key, api_secret, app_id);
+    const token = serverClient.createUserToken(userId);
+
     //create user in database
     const newUser = new Users({
       userId,
@@ -55,18 +59,17 @@ const signup = async (req, res) => {
       password: hashedPassword,
       date: currentDate,
     });
+
     try {
-      await newUser.save();
+      if (token) {
+        await newUser.save();
+      }
     } catch (err) {
       console.log(e);
       return res
         .status(500)
         .json({ message: ["unable to save user to database"] });
     }
-
-    const serverClient = connect(api_key, api_secret, app_id);
-
-    const token = serverClient.createUserToken(userId);
 
     res.status(200).json({ token, userId, email, hashedPassword });
   } catch (error) {
@@ -82,25 +85,6 @@ const createProfile = async (req, res) => {
   try {
     const client = StreamChat.getInstance(api_key, api_secret);
     const updateToken = crypto.randomBytes(16).toString("hex");
-
-    //update user info in database
-    const updateUser = await Users.updateOne(
-      { userId },
-      {
-        $set: {
-          avatar,
-          name,
-          dateOfBirth: date,
-          bio,
-          gender,
-          profileToken: updateToken,
-        },
-      }
-    );
-
-    if (updateUser.matchedCount === 0) {
-      return res.status(404).json({ message: ["User not found"] });
-    }
 
     //update stream user database
     const update = {
@@ -119,6 +103,25 @@ const createProfile = async (req, res) => {
 
     const updatedUser = response.users[userId];
     const profileToken = updatedUser.profileToken;
+
+    //update user info in database
+      const updateUser = await Users.updateOne(
+        { userId },
+        {
+          $set: {
+            avatar,
+            name,
+            dateOfBirth: date,
+            bio,
+            gender,
+            profileToken: updateToken,
+          },
+        }
+      );
+
+      if (updateUser.matchedCount === 0) {
+        return res.status(404).json({ message: ["User not found"] });
+      }
 
     res.status(200).json({ ...updatedUser, avatar, name, profileToken });
   } catch (error) {
@@ -193,6 +196,17 @@ const createGroup = async (req, res) => {
     const groupId = crypto.randomBytes(16).toString("hex");
     const allMembers = [...members, { userId }];
 
+    const channel = client.channel("messaging", groupId, {
+      image: avatar,
+      banner: banner,
+      name: name,
+      description: description,
+      members: formattedMembers,
+      topics: topics,
+      created_by_id: userId,
+    });
+    await channel.create();
+
     //create group in database
     const newGroup = new Groups({
       groupId,
@@ -216,7 +230,6 @@ const createGroup = async (req, res) => {
     const formattedMembers = allMembers.map((member) => ({
       user: { id: member.userId },
     }));
-
     const addGroupsToUserDb = async () => {
       const allMembers = [...members, { userId }];
       const updatePromises = allMembers.map((member) =>
@@ -236,17 +249,6 @@ const createGroup = async (req, res) => {
         .status(500)
         .json({ message: ["Unable to update user groups in database"] });
     }
-
-    const channel = client.channel("messaging", groupId, {
-      image: avatar,
-      banner: banner,
-      name: name,
-      description: description,
-      members: formattedMembers,
-      topics: topics,
-      created_by_id: userId,
-    });
-    await channel.create();
 
     res.status(200).json({ message: "channel created successfully" });
   } catch (error) {
@@ -310,6 +312,7 @@ const getGroupDetails = async (req, res) => {
   const { id } = req.query;
   try {
     const group = await Groups.findOne({ groupId: id });
+
     if (!group) {
       return res.status(200).json({ message: "group not found" });
     }
