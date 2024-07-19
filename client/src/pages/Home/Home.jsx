@@ -41,12 +41,13 @@ const Home = () => {
             </div>
             {groups.slice(0,5).map((group) => {
               return (
+                <Link to={`/group/profile/${group.groupId}`} key={group._id}>
                 <ItemContainer
                   avatar={group.avatar}
                   name={group.name}
                   categories={group.topics}
-                  key={group._id}
                 />
+                </Link>
               );
             })
 }
