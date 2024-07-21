@@ -19,6 +19,8 @@ const passwordReq = [
   "at least 8 characters",
 ];
 
+// user controllers
+
 const signup = async (req, res) => {
   const { email, password, confirmPassword } = req.body;
   const currentDate = new Date();
@@ -178,6 +180,40 @@ const login = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await Users.find();
+
+    if (users.length < 0) {
+      return res.status(200).json({ message: "no users found" });
+    }
+    return res.status(200).json(users);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "unable to get users" });
+  }
+};
+
+const search = async (req, res) => {
+  const { query } = req.query; // Use req.query for GET request parameters
+
+  try {
+    // Check if users exist in the database with a name similar to the query
+    const users = await Users.find({ name: new RegExp(query, "i") }); // Use RegExp for case-insensitive search
+
+    if (!users.length) {
+      return res.status(404).json({ message: "User does not exist" });
+    }
+
+    res.status(200).json({ users });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Failed to search users" });
+  }
+};
+
+// group controllers
+
 const createGroup = async (req, res) => {
   const { avatar, banner, name, description, members, topics, userId } =
     req.body;
@@ -258,24 +294,6 @@ const createGroup = async (req, res) => {
   }
 };
 
-const search = async (req, res) => {
-  const { query } = req.query; // Use req.query for GET request parameters
-
-  try {
-    // Check if users exist in the database with a name similar to the query
-    const users = await Users.find({ name: new RegExp(query, "i") }); // Use RegExp for case-insensitive search
-
-    if (!users.length) {
-      return res.status(404).json({ message: "User does not exist" });
-    }
-
-    res.status(200).json({ users });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Failed to search users" });
-  }
-};
-
 const getAllGroupsJoined = async (req, res) => {
   const { userId } = req.query;
 
@@ -295,6 +313,7 @@ const getAllGroupsJoined = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
 const getAllGroups = async (req, res) => {
   try {
     const groups = await Groups.find();
@@ -308,6 +327,7 @@ const getAllGroups = async (req, res) => {
     return res.status(500).json({ message: "unable to get groups" });
   }
 };
+
 const getGroupDetails = async (req, res) => {
   const { id } = req.query;
   try {
@@ -322,6 +342,8 @@ const getGroupDetails = async (req, res) => {
     return res.status(500).json({ message: "unable to get group details" });
   }
 };
+
+
 
 //VALIDATION FUNCTIONS
 
@@ -343,6 +365,7 @@ module.exports = {
   login,
   createProfile,
   createGroup,
+  getAllUsers,
   search,
   getAllGroupsJoined,
   getAllGroups,

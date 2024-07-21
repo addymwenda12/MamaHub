@@ -4,6 +4,7 @@ const {
   signup,
   login,
   createProfile,
+  getAllUsers,
   createGroup,
   search,
   getAllGroupsJoined,
@@ -17,6 +18,7 @@ router.post("/signup", signup);
 router.post("/login", login);
 router.post("/create-profile", createProfile);
 router.post("/create-group", createGroup);
+router.get("/all-users", getAllUsers);
 router.get("/search-users", search);
 router.get("/get-groups", getAllGroupsJoined);
 router.get("/all-groups", getAllGroups);
