@@ -65,7 +65,7 @@ const GroupProfile = () => {
               <section className="suggested-section-items">
                 {users.map((user) => {
                   return (
-                    <Link to={`/user/profile/${user._id}`} key={user._id}>
+                    <Link to={`/user/profile/${user.userId}`} key={user._id}>
                       <SuggestedContainer user={user} />;
                     </Link>
                   );

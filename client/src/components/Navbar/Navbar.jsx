@@ -1,28 +1,22 @@
 import "./navbar.css";
 
-import { GlobalContext } from "../../context/context";
 import menu from "./navMenu";
 
-import { useContext} from "react";
-import { NavLink,useNavigate } from "react-router-dom";
-import Cookies from 'universal-cookie'
-
+import { Link, NavLink } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 import { IoNotificationsOutline } from "react-icons/io5";
 import { MdOutlineAddBox } from "react-icons/md";
 
-const cookies = new Cookies()
-
+const cookies = new Cookies();
 
 export default function Navbar() {
-  const {user}=useContext(GlobalContext)
-  const navigate = useNavigate()
-  const avatar = cookies.get('image')
+  const avatar = cookies.get("image");
+  const userId = cookies.get("userId");
+  console.log(avatar)
 
   return (
-    <nav
-      className="navbar-container"
-    >
+    <nav className="navbar-container">
       <ul className="nav-menu">
         {menu.map((menuItem) => {
           return (
@@ -43,16 +37,14 @@ export default function Navbar() {
       </ul>
 
       <div className="right-section">
-        <MdOutlineAddBox size={24} className="icon-btns"/>
-        <IoNotificationsOutline size={24} className="icon-btns"/>
-        {
-          user === null?
-          <button className="login-btn" onClick={()=>navigate('/accounts/login')}>login</button>
-          :
-         <div className="avatar-container">
-          <img src={avatar} alt="" className="avatar" />
-         </div>
-        }
+        <MdOutlineAddBox size={24} className="icon-btns" />
+        <IoNotificationsOutline size={24} className="icon-btns" />
+
+        <Link to={`/user/profile/${userId}`}>
+          <div className="avatar-container">
+            <img src={avatar} alt="" className="avatar" />
+          </div>
+        </Link>
       </div>
     </nav>
   );
