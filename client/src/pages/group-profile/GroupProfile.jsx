@@ -1,7 +1,7 @@
 import "./groupProfile.css";
 import {
   GroupBanner,
-  GroupNavigation,
+  Navigation,
   Journeys,
   Media,
   Recommedations,
@@ -51,7 +51,7 @@ const GroupProfile = () => {
       <section className="group-profile">
         <GroupBanner group={group} />
         <section className="group-profile-body">
-          <GroupNavigation />
+          <Navigation />
           {currentGroupSection === "journeys" ? (
             <Journeys />
           ) : currentGroupSection === "media" ? (

@@ -27,6 +27,7 @@ export default function GlobalState({ children }) {
     members:[]
   })
   const [currentGroupSection,setCurrentGroupSection]=useState('journeys')
+  const [currentUserSection,setCurrentUserSection]=useState('journeys')
   const switchForm = () => {
     setIsSignUp((prevIsSignup) => !prevIsSignup);
   };
@@ -57,7 +58,9 @@ export default function GlobalState({ children }) {
         selectedGroupDetails, 
         setSelectedGroupDetails,
         currentGroupSection,
-        setCurrentGroupSection
+        setCurrentGroupSection,
+        currentUserSection,
+        setCurrentUserSection
       }}
     >
       {children}
