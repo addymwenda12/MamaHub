@@ -28,6 +28,7 @@ export default function GlobalState({ children }) {
   })
   const [currentGroupSection,setCurrentGroupSection]=useState('journeys')
   const [currentUserSection,setCurrentUserSection]=useState('journeys')
+  // TODO: FIX THIS SO THAT ON RELOAD SECTION CHANGES BACK TO THE DEFAULT 
   const switchForm = () => {
     setIsSignUp((prevIsSignup) => !prevIsSignup);
   };

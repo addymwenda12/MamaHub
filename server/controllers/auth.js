@@ -4,6 +4,7 @@ const StreamChat = require("stream-chat").StreamChat;
 const crypto = require("crypto");
 const Users = require("../model/users");
 const Groups = require("../model/groups");
+const users = require("../model/users");
 
 require("dotenv").config();
 
@@ -193,6 +194,20 @@ const getAllUsers = async (req, res) => {
     return res.status(500).json({ message: "unable to get users" });
   }
 };
+const getUserDetails = async (req, res) => {
+  const { id } = req.query;
+  try {
+    const user = await Users.findById( id );
+
+    if (!user) {
+      return res.status(200).json({ message: "user not found" });
+    }
+    return res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "unable to get user details" });
+  }
+};
 
 const search = async (req, res) => {
   const { query } = req.query; // Use req.query for GET request parameters
@@ -366,6 +381,7 @@ module.exports = {
   createProfile,
   createGroup,
   getAllUsers,
+  getUserDetails,
   search,
   getAllGroupsJoined,
   getAllGroups,
